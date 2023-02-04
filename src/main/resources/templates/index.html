@@ -18,8 +18,8 @@
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <ion-icon name="link-outline"></ion-icon>
                 </div>
-                <input type="search" id="search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50" placeholder="url 입력" required>
-                <button type="submit" class="text-black absolute right-2.5 bottom-2.5 bg-yellow-400 font-medium rounded-lg text-sm px-4 py-2">확인</button>
+                <input type="search" id="url" name="url" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50" placeholder="url 입력" required>
+                <button type="button" id="searchBtn" class="text-black absolute right-2.5 bottom-2.5 bg-yellow-400 font-medium rounded-lg text-sm px-4 py-2">확인</button>
               </div>
             </form>
           </div>
@@ -52,5 +52,27 @@
         </div>
       </div>
     </div>
+    <script>
+      $('#searchBtn').on("click", function (){
+        let data = $('#searchForm').serialize();
+        console.log(data);
+        $.ajax({
+          type: 'get',
+          url: '/search',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          data: data,
+          success: function(data) {
+            alert(data)
+          },
+          error: function(xhr, status, error) {
+            Swal.fire({
+              icon: 'error',
+              text: '오류가 발생했습니다.',
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
