@@ -15,6 +15,7 @@ public class EmbedService {
 
     public static final String YOUTUBE = "youtube";
     public static final String TWITTER = "twitter";
+    public static final String INSTAGRAM = "instagram";
     public static final String VIMEO = "vimeo";
 
     public JSONObject urlParser(String url) {
@@ -24,6 +25,8 @@ public class EmbedService {
             return twitterHandler(url);
         } else if (url.contains(VIMEO)) {
             return vimeoHandler(url);
+        } else if (url.contains(INSTAGRAM)) {
+            return instagramHandler(url);
         } else {
             return null;
         }
@@ -45,6 +48,18 @@ public class EmbedService {
         sb.append("https://publish.twitter.com/oembed?url=https://twitter.com/");
         sb.append(url.split("twitter.com/")[1]);
         sb.append("&format=json");
+
+        String jsonData = getJsonObject(sb.toString());
+
+        return jsonHandlerService.jsonParsing(jsonData);
+    }
+
+    public JSONObject instagramHandler(String url) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("https://api.instagram.com/oembed?omitscript=true&url=https://www.instagram.com/p/");
+        sb.append(url.split("/p/")[1]);
+
+        log.info("sb.toString()={}", sb.toString());
 
         String jsonData = getJsonObject(sb.toString());
 
