@@ -6,50 +6,130 @@
   <head th:replace="fragment/head :: head"></head>
 
   <body>
-    <div id="wrapper">
-      <div class="main_content">
-        <div class="mcontainer">
-          <div class="h-25 w-full bg-purple-500 text-center">
-            <div class="p-5">
-              <h2 class="text-white font-bold text-xl">oEmbed Test</h2>
-            </div>
-            <form class="px-5 pb-5" id="searchForm">
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <ion-icon name="link-outline"></ion-icon>
-                </div>
-                <input type="search" id="url" name="url" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50" placeholder="url 입력" required>
-                <button type="button" id="searchBtn" class="text-black absolute right-2.5 bottom-2.5 bg-yellow-400 font-medium rounded-lg text-sm px-4 py-2">확인</button>
-              </div>
-            </form>
-          </div>
-          <table class="min-w-full">
-            <thead class="bg-white border-b">
-            <tr>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                #
-              </th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                content
-              </th>
-            </tr>
-            </thead>
-            <tbody class="text-left">
-            <tr class="bg-gray-100 border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Mark
-              </td>
-            </tr>
-            <tr class="bg-white border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Jacob
-              </td>
-            </tr>
-            </tbody>
-          </table>
+  <style>
+    #youtubeTable{
+      border: 1px solid #CCC;
+    }
+  </style>
+    <div class="bg-gray-200">
+      <div class="h-25 w-full bg-purple-500 text-center">
+        <div class="p-5">
+          <h2 class="text-white font-bold text-xl"><a th:href="@{/}">oEmbed Test</a></h2>
         </div>
+        <form class="px-5 pb-5" id="searchForm" onsubmit="return false;">
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <ion-icon name="link-outline"></ion-icon>
+            </div>
+            <input type="search" id="url" name="url" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50" placeholder="url 입력" required>
+            <button type="button" id="searchBtn" class="text-black absolute right-2.5 bottom-2.5 bg-yellow-400 font-medium rounded-lg text-sm px-4 py-2">확인</button>
+          </div>
+        </form>
+      </div>
+      <div class="container mx-auto m-5">
+        <table id="youtubeTable" class="w-auto">
+          <tbody id="content" class="text-left p-3">
+          <tr class="bg-gray-100 border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              title
+            </td>
+            <td class="text-lg w-full font-bold text-gray-900 px-6 py-4 ">
+              <span name="title">NO_DATA</span>
+            </td>
+          </tr>
+          <tr class="bg-white border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              type
+            </td>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 ">
+              <span name="type">NO_DATA</span>
+            </td>
+          </tr>
+          <tr class="bg-gray-100 border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              provider_name
+            </td>
+            <td class="text-sm text-gray-900 px-6 py-4 ">
+              <span name="provider_name">NO_DATA</span>
+            </td>
+          </tr>
+          <tr class="bg-white border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              provider_url
+            </td>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 ">
+              <a name="provider_url_a">
+                <span name="provider_url">NO_DATA</span>
+              </a>
+            </td>
+          </tr>
+          <tr class="bg-gray-100 border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              author_name
+            </td>
+            <td class="text-sm text-gray-900 px-6 py-4 ">
+              <span name="author_name">NO_DATA</span>
+            </td>
+          </tr>
+          <tr class="bg-white border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              author_url
+            </td>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 ">
+              <a name="author_url_a"><span name="author_url">NO_DATA</span></a>
+            </td>
+          </tr>
+          <tr class="bg-white border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              html(640/480)
+            </td>
+            <td class="text-sm text-gray-900 font-light px-6 py-4">
+              <span name="html">NO_DATA</span>
+              <div id="html_div" name="html_div"></div>
+            </td>
+          </tr>
+          <tr class="bg-gray-100 border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              width
+            </td>
+            <td class="text-sm text-gray-900 px-6 py-4 ">
+              <span name="width">NO_DATA</span>
+            </td>
+          </tr>
+          <tr class="bg-white border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              height
+            </td>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 ">
+              <span name="height">NO_DATA</span>
+            </td>
+          </tr>
+          <tr class="bg-gray-100 border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              thumbnail_url(640x480)
+            </td>
+            <td class="text-sm text-gray-900 px-6 py-4 ">
+              <img name="thumbnail_url_img" width="640" height="480">
+            </td>
+          </tr>
+          <tr class="bg-white border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              thumbnail_width
+            </td>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 ">
+              <span name="thumbnail_width">NO_DATA</span>
+            </td>
+          </tr>
+          <tr class="bg-gray-100 border-b">
+            <td class="px-6 py-4  text-sm font-medium text-gray-900">
+              thumbnail_height
+            </td>
+            <td class="text-sm text-gray-900 px-6 py-4 ">
+              <span name="thumbnail_height">NO_DATA</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <script>
@@ -63,9 +143,18 @@
           contentType: 'application/json; charset=utf-8',
           data: data,
           success: function(data) {
-            alert(data)
+            if (data == null) {
+              Swal.fire({
+                icon: 'error',
+                text: 'url이 잘못되었습니다.',
+              });
+            } else {
+              console.log(data);
+              viewSetting(data);
+            }
           },
           error: function(xhr, status, error) {
+            $("#dataForm span").text("");
             Swal.fire({
               icon: 'error',
               text: '오류가 발생했습니다.',
@@ -73,6 +162,28 @@
           }
         });
       });
+
+      function viewSetting(data) {
+        const $table = $("#content");
+        $("#dataForm span").text("");
+        $table.find("span[name=title]").text(data.title);
+        $table.find("span[name=type]").text(data.type);
+        $table.find("span[name=version]").text(data.version);
+        $table.find("span[name=provider_name]").text(data.provider_name);
+        $table.find("span[name=provider_url]").text(data.provider_url);
+        $table.find("a[name=provider_url_a]").attr('href', data.provider_url);
+        $table.find("span[name=author_name]").text(data.author_name);
+        $table.find("span[name=author_url]").text(data.author_url);
+        $table.find("a[name=author_url_a]").attr('href', data.author_url);
+        $table.find("span[name=html]").text(data.html);
+        $table.find("div[name=html_div]").html(data.html);
+        $('#html_div iframe').css('width', '640').css('height', '480');
+        $table.find("span[name=width]").text(data.width);
+        $table.find("span[name=height]").text(data.height);
+        $table.find("img[name=thumbnail_url_img]").attr('src', data.thumbnail_url);
+        $table.find("span[name=thumbnail_width]").text(data.thumbnail_width);
+        $table.find("span[name=thumbnail_height]").text(data.thumbnail_height);
+      }
     </script>
   </body>
 </html>
