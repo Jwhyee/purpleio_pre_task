@@ -19,57 +19,24 @@ public class EmbedService {
     public static final String VIMEO = "vimeo";
 
     public JSONObject urlParser(String url) {
+        StringBuilder sb = new StringBuilder();
+
         if (url.contains(YOUTUBE)) {
-            return youtubeHandler(url);
+            sb.append("https://www.youtube.com/oembed?url=https://youtube.com/watch?v=");
+            sb.append(url.split("watch\\?v=")[1]);
+            sb.append("&format=json");
         } else if (url.contains(TWITTER)) {
-            return twitterHandler(url);
+            sb.append("https://publish.twitter.com/oembed?url=https://twitter.com/");
+            sb.append(url.split("twitter.com/")[1]);
+            sb.append("&format=json");
         } else if (url.contains(VIMEO)) {
-            return vimeoHandler(url);
+            sb.append("https://vimeo.com/api/oembed.json?url=");
+            sb.append(url);
         } else if (url.contains(INSTAGRAM)) {
-            return instagramHandler(url);
-        } else {
-            return null;
+            sb.append("https://api.instagram.com/oembed?omitscript=true&url=https://www.instagram.com/p/");
+            sb.append(url.split("/p/")[1]);
+            sb.append("&format=json");
         }
-    }
-
-    public JSONObject youtubeHandler(String url) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("https://www.youtube.com/oembed?url=https://youtube.com/watch?v=");
-        sb.append(url.split("watch\\?v=")[1]);
-        sb.append("&format=json");
-
-        String jsonData = getJsonObject(sb.toString());
-
-        return jsonHandlerService.jsonParsing(jsonData);
-    }
-
-    public JSONObject twitterHandler(String url) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("https://publish.twitter.com/oembed?url=https://twitter.com/");
-        sb.append(url.split("twitter.com/")[1]);
-        sb.append("&format=json");
-
-        String jsonData = getJsonObject(sb.toString());
-
-        return jsonHandlerService.jsonParsing(jsonData);
-    }
-
-    public JSONObject instagramHandler(String url) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("https://api.instagram.com/oembed?omitscript=true&url=https://www.instagram.com/p/");
-        sb.append(url.split("/p/")[1]);
-
-        log.info("sb.toString()={}", sb.toString());
-
-        String jsonData = getJsonObject(sb.toString());
-
-        return jsonHandlerService.jsonParsing(jsonData);
-    }
-
-    public JSONObject vimeoHandler(String url) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("https://vimeo.com/api/oembed.json?url=");
-        sb.append(url);
 
         String jsonData = getJsonObject(sb.toString());
 
@@ -78,7 +45,6 @@ public class EmbedService {
 
     private String getJsonObject(String result) {
         return jsonHandlerService.getData(result);
-
     }
 
 }

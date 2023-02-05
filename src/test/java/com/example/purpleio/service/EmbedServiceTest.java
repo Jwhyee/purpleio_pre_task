@@ -19,7 +19,7 @@ class EmbedServiceTest {
     @Test
     void getYoutubeUrlTest() {
         String url = "https://www.youtube.com/watch?v=t8LQnUSBqe8&ab_channel=Avocado%F0%9F%A5%91forHaerin";
-        JSONObject object = embedService.youtubeHandler(url);
+        JSONObject object = embedService.urlParser(url);
         System.out.println("object = " + object.toJSONString());
     }
 
