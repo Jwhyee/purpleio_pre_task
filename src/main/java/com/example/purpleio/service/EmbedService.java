@@ -22,6 +22,8 @@ public class EmbedService {
             return youtubeHandler(url);
         } else if (url.contains(TWITTER)) {
             return twitterHandler(url);
+        } else if (url.contains(VIMEO)) {
+            return vimeoHandler(url);
         } else {
             return null;
         }
@@ -43,6 +45,16 @@ public class EmbedService {
         sb.append("https://publish.twitter.com/oembed?url=https://twitter.com/");
         sb.append(url.split("twitter.com/")[1]);
         sb.append("&format=json");
+
+        String jsonData = getJsonObject(sb.toString());
+
+        return jsonHandlerService.jsonParsing(jsonData);
+    }
+
+    public JSONObject vimeoHandler(String url) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("https://vimeo.com/api/oembed.json?url=");
+        sb.append(url);
 
         String jsonData = getJsonObject(sb.toString());
 

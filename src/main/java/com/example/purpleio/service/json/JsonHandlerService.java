@@ -24,6 +24,8 @@ public class JsonHandlerService {
                     new String[]{"title", "author_name", "author_url", "type", "height", "width", "version", "provider_name", "provider_url", "thumbnail_height", "thumbnail_width", "thumbnail_url", "html"};
             case EmbedService.TWITTER ->
                     new String[]{"title", "html", "width", "height", "type", "cache_age", "provider_name", "provider_url", "version"};
+            case EmbedService.VIMEO ->
+                    new String[]{"type", "version", "provider_name", "provider_url", "title", "author_name", "author_url", "is_plus", "account_type", "html", "width", "height", "duration", "description", "thumbnail_url", "thumbnail_width", "thumbnail_height", "thumbnail_url_with_play_button"};
             default -> new String[]{"null"};
         };
     }
