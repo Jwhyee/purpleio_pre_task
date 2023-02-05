@@ -23,7 +23,7 @@
 2. `RestController`를 통해 입력된 값을 `oEmbed`로 받기 위해 각 플랫폼에 형태로 변환합니다.
    - 예) Youtube ➡️ `"https://www.youtube.com/oembed?url=https://youtube.com/watch?v="`
 3. 요청을 보낼 영상(페이지)의 `URI`를 가져와 변환한 문자열과 합칩니다.
-   - 예) `"https://www.youtube.com/watch?v=t8LQnUSBqe8&ab_channel=Avocado%F0%9F%A5%91forHaerin"`
+   - 예) `"https://www.youtube.com/oembed?url=https://youtube.com/watch?v=t8LQnUSBqe8&ab_channel=Avocado%F0%9F%A5%91forHaerin&format=json"`
 4. 합쳐진 문자열을 가지고 `HttpURLConnection`을 이용해 `GET` 요청을 보냅니다.
 5. 받아온 문자열을 통해 `JSONObject` 타입으로 변환합니다.
 6. 변환된 `JSONObject`를 `Ajax`를 통해 받아 `View`에 값을 넣어줍니다.
