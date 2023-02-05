@@ -1,4 +1,4 @@
-package com.example.purpleio;
+package com.example.purpleio.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
