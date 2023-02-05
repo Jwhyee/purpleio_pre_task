@@ -58,7 +58,7 @@
               provider_url
             </td>
             <td class="text-sm text-gray-900 font-light px-6 py-4 ">
-              <a name="provider_url_a">
+              <a name="provider_url_a" target="_blank">
                 <span name="provider_url">NO_DATA</span>
               </a>
             </td>
@@ -76,7 +76,7 @@
               author_url
             </td>
             <td class="text-sm text-gray-900 font-light px-6 py-4 ">
-              <a name="author_url_a"><span name="author_url">NO_DATA</span></a>
+              <a name="author_url_a" target="_blank"><span name="author_url">NO_DATA</span></a>
             </td>
           </tr>
           <tr class="bg-white border-b">
@@ -154,7 +154,7 @@
             }
           },
           error: function(xhr, status, error) {
-            $("#dataForm span").text("");
+            $("#content span").text("");
             Swal.fire({
               icon: 'error',
               text: '오류가 발생했습니다.',
@@ -165,7 +165,8 @@
 
       function viewSetting(data) {
         const $table = $("#content");
-        $("#dataForm span").text("");
+        $("#content span").text("");
+        $("#content img").removeAttr("src");
         $table.find("span[name=title]").text(data.title);
         $table.find("span[name=type]").text(data.type);
         $table.find("span[name=version]").text(data.version);

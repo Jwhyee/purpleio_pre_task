@@ -22,15 +22,27 @@ public class JsonHandlerService {
         return switch (platform) {
             case EmbedService.YOUTUBE ->
                     new String[]{"title", "author_name", "author_url", "type", "height", "width", "version", "provider_name", "provider_url", "thumbnail_height", "thumbnail_width", "thumbnail_url", "html"};
+            case EmbedService.TWITTER ->
+                    new String[]{"title", "html", "width", "height", "type", "cache_age", "provider_name", "provider_url", "version"};
             default -> new String[]{"null"};
         };
     }
 
-    public JSONObject youtubeJson(String data){
+    public JSONObject jsonParsing(String data){
+        String platform = "";
+        if (data.contains(EmbedService.YOUTUBE)) {
+            platform = EmbedService.YOUTUBE;
+        } else if (data.contains(EmbedService.TWITTER)) {
+            platform = EmbedService.TWITTER;
+        } else if (data.contains(EmbedService.VIMEO)) {
+            platform = EmbedService.VIMEO;
+        } else {
+            return null;
+        }
         JSONObject jsonobj = new JSONObject();
-        String[] key = keyInit(EmbedService.YOUTUBE);
+        String[] key = keyInit(platform);
         data=data.replace("{","");
-        jsonobj.put("url", EmbedService.YOUTUBE);
+        jsonobj.put("url", platform);
         for(int i=0; i<key.length; i++){
             if(i== key.length-1){
                 int start = data.indexOf(key[i]);
@@ -54,6 +66,7 @@ public class JsonHandlerService {
     }
 
     public String getData(String url) {
+        log.info("url = {}", url);
         String data = null;
         try {
             URL uri = new URL(url);
@@ -82,6 +95,7 @@ public class JsonHandlerService {
     }
 
     public  String convertString(String val) {
+        log.info("val = {}", val);
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < val.length(); i++) {
             if ('\\' == val.charAt(i) && 'u' == val.charAt(i + 1)) {
@@ -92,7 +106,11 @@ public class JsonHandlerService {
                 sb.append(val.charAt(i));
             }
         }
-        return sb.toString();
+        String result = sb.toString().replaceAll("\\\\/", "/").replaceAll("=\\\\", "=").replaceAll("\\\\\"", "\"");
+
+        log.info("after val = {}", sb.toString());
+        log.info("after result = {}", result);
+        return result;
     }
 
 }

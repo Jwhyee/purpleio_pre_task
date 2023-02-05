@@ -14,10 +14,14 @@ public class EmbedService {
     private final JsonHandlerService jsonHandlerService;
 
     public static final String YOUTUBE = "youtube";
+    public static final String TWITTER = "twitter";
+    public static final String VIMEO = "vimeo";
 
     public JSONObject urlParser(String url) {
         if (url.contains(YOUTUBE)) {
             return youtubeHandler(url);
+        } else if (url.contains(TWITTER)) {
+            return twitterHandler(url);
         } else {
             return null;
         }
@@ -31,7 +35,18 @@ public class EmbedService {
 
         String jsonData = getJsonObject(sb.toString());
 
-        return jsonHandlerService.youtubeJson(jsonData);
+        return jsonHandlerService.jsonParsing(jsonData);
+    }
+
+    public JSONObject twitterHandler(String url) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("https://publish.twitter.com/oembed?url=https://twitter.com/");
+        sb.append(url.split("twitter.com/")[1]);
+        sb.append("&format=json");
+
+        String jsonData = getJsonObject(sb.toString());
+
+        return jsonHandlerService.jsonParsing(jsonData);
     }
 
     private String getJsonObject(String result) {
