@@ -1,11 +1,5 @@
 # [겨울인턴] 2023년 퍼플아이오 백엔드 테스트
 
-## 실행 결과
-
-| Youtube | Twitter | Vimeo |
-|---------|---------|-------|
-| ![image](https://user-images.githubusercontent.com/82663161/216811440-f9730436-e546-4483-afcb-7656d1bbc3f3.png) | ![image](https://user-images.githubusercontent.com/82663161/216811591-7b9636ed-f60f-43f3-819c-928a76e191ec.png) | ![image](https://user-images.githubusercontent.com/82663161/216811416-f14d8646-c0b5-420d-be40-4cbcf43ce5b7.png) |
-
 ## 구조
 
 ### 개발 환경
@@ -15,18 +9,32 @@
 ### 사용 라이브러리
 - Thymeleaf + jQuery
 - Lombok
-- Simple Json
+- Json Simple
 
 ### 요청 흐름
 
-1. 클라이언트에게 `URL` 입력을 받습니다.
-2. `RestController`를 통해 입력된 값을 `oEmbed`로 받기 위해 각 플랫폼에 형태로 변환합니다.
-   - 예) Youtube ➡️ `"https://www.youtube.com/oembed?url=https://youtube.com/watch?v="`
-3. 요청을 보낼 영상(페이지)의 `URI`를 가져와 변환한 문자열과 합칩니다.
-   - 예) `"https://www.youtube.com/oembed?url=https://youtube.com/watch?v=t8LQnUSBqe8&ab_channel=Avocado%F0%9F%A5%91forHaerin&format=json"`
-4. 합쳐진 문자열을 가지고 `HttpURLConnection`을 이용해 `GET` 요청을 보냅니다.
-5. 받아온 문자열을 통해 `JSONObject` 타입으로 변환합니다.
-6. 변환된 `JSONObject`를 `Ajax`를 통해 받아 `View`에 값을 넣어줍니다.
+1. 클라이언트에게 `View`에서 `URL`을 입력 받습니다.
+2. `Ajax`를 통한 `GET` 요청으로 `RestController`에 `URL`을 전달합니다.
+3. 각 플랫폼 마다 `oEmbed`에 대한 요청 `URL`이 다르기 때문에 요청 방식에 맞추고, 클라이언트에게 입력받은 `URL`을 연결해줍니다.
+   ```bash
+   # Youtube
+   https://www.youtube.com/oembed?url=
+   
+   # Twitter
+   https://publish.twitter.com/oembed?url=
+   
+   # Vimeo
+   https://vimeo.com/api/oembed.json?url=
+   ```
+4. `HttpURLConnection`을 통해 완성된 `URL`로 `GET` 요청을 보내 응답 결과를 받아옵니다.
+5. `JSONParser`를 이용해 받아온 결과를 `JSONObject` 형태로 변환합니다.
+6. `JSONObject` 형태로 `View`에 반환하여 결과에 맞게 내용을 작성합니다.
+
+## 실행 결과
+
+| Youtube | Vimeo | Twitter |
+|---------|---------|-------|
+| ![image](https://user-images.githubusercontent.com/82663161/216811440-f9730436-e546-4483-afcb-7656d1bbc3f3.png) | ![image](https://user-images.githubusercontent.com/82663161/216819798-2bdd205e-fbeb-4850-b68b-afbebdd7e26c.png) | ![image](https://user-images.githubusercontent.com/82663161/216811591-7b9636ed-f60f-43f3-819c-928a76e191ec.png) |
 
 ## 미구현 사항
 

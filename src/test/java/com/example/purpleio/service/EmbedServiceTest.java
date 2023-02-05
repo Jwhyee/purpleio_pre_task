@@ -1,6 +1,5 @@
 package com.example.purpleio.service;
 
-import com.example.purpleio.service.json.JsonHandlerService;
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ class EmbedServiceTest {
     @Autowired
     private EmbedService embedService;
     @Autowired
-    private JsonHandlerService jsonHandlerService;
+    private JsonService jsonService;
 
     @Test
     void getYoutubeUrlTest() {
@@ -27,7 +26,7 @@ class EmbedServiceTest {
     void jsonParsingTest() {
         String videoUrl = "https://www.youtube.com/oembed?url=https://youtube.com/watch?v=t8LQnUSBqe8&ab_channel=Avocado%F0%9F%A5%91forHaerin&format=json";
 
-        JSONObject object = jsonHandlerService.getJsonObj(videoUrl);
+        JSONObject object = jsonService.getJsonObj(videoUrl);
 
         assertThat(object.get("type")).isEqualTo("video");
         assertThat(object.get("provider_name")).isEqualTo("YouTube");

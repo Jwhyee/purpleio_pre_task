@@ -1,4 +1,4 @@
-package com.example.purpleio.service.json;
+package com.example.purpleio.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.net.URL;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class JsonHandlerService {
+public class JsonService {
 
     public JSONObject getJsonObj(String oEmbedUrl) {
         JSONObject object = new JSONObject();
