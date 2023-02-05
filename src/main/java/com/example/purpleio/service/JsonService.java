@@ -39,7 +39,9 @@ public class JsonService {
             JSONParser parser = new JSONParser();
             object = (JSONObject) parser.parse(result);
         } catch (IOException | ParseException e) {
+            log.warn("Parsing Error={}", e.toString());
             e.printStackTrace();
+            return null;
         }
         return object;
     }

@@ -135,7 +135,6 @@
     <script>
       $('#searchBtn').on("click", function (){
         let data = $('#searchForm').serialize();
-        console.log(data);
         $.ajax({
           type: 'get',
           url: '/search',
@@ -143,21 +142,14 @@
           contentType: 'application/json; charset=utf-8',
           data: data,
           success: function(data) {
-            if (data == null) {
-              Swal.fire({
-                icon: 'error',
-                text: 'url이 잘못되었습니다.',
-              });
-            } else {
-              console.log(data);
-              viewSetting(data);
-            }
+            viewSetting(data);
           },
           error: function(xhr, status, error) {
             $("#content span").text("");
             Swal.fire({
               icon: 'error',
               text: '오류가 발생했습니다.',
+              footer: '<a>현재 Instagram은 지원하지 않습니다.</a>'
             });
           }
         });

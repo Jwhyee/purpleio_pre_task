@@ -35,6 +35,9 @@ public class EmbedService {
             sb.append("https://api.instagram.com/oembed?omitscript=true&url=https://www.instagram.com/p/");
             sb.append(url.split("/p/")[1]);
             sb.append("&format=json");
+        } else {
+            log.warn("URL Error={}", "잘못된 URL이 입력되었습니다.");
+            return null;
         }
 
         return jsonService.getJsonObj(sb.toString());
