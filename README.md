@@ -18,17 +18,17 @@
 3. 각 플랫폼 마다 `oEmbed`에 대한 요청 `URL`이 다르기 때문에 요청 방식에 맞추고, 클라이언트에게 입력받은 `URL`을 연결해줍니다.
    ```bash
    # Youtube
-   https://www.youtube.com/oembed?url=
+   https://www.youtube.com/oembed?url=${client_request_url}
    
    # Twitter
-   https://publish.twitter.com/oembed?url=
+   https://publish.twitter.com/oembed?url=${client_request_url}
    
    # Vimeo
-   https://vimeo.com/api/oembed.json?url=
+   https://vimeo.com/api/oembed.json?url=${client_request_url}
    ```
-4. `HttpURLConnection`을 통해 완성된 `URL`로 `GET` 요청을 보내 응답 결과를 받아옵니다.
+4. `HttpURLConnection`을 통해 완성된 `URL`에 `GET` 요청을 보내 응답 결과를 받아옵니다.
 5. `JSONParser`를 이용해 받아온 결과를 `JSONObject` 형태로 변환합니다.
-6. `JSONObject` 형태로 `View`에 반환하여 결과에 맞게 내용을 작성합니다.
+6. `View`에 반환하여 결과에 맞게 내용을 그려줍니다.
 
 ## 실행 결과
 
@@ -40,7 +40,7 @@
 
 ### Instagram oEmbed
 
-Meta for Developer [공식문서](https://developers.facebook.com/docs/features-reference/oembed-read)에 따르면 oEmbed 기능을 사용하기 위해서는 앱 검수 절차가 필요하도록 변경되었습니다.
+Meta for Developer [공식문서](https://developers.facebook.com/docs/features-reference/oembed-read)에 따르면 `oEmbed` 기능을 사용하기 위해서는 앱 검수 절차가 필요하도록 변경되었습니다.
 
 테스트를 위해 기존 방식으로 구현을 해보았고, 요청을 보내보니 `JSON` 형태가 아닌 해당 페이지 자체를 다시 반환하는 모습을 볼 수 있었으며, `Postman`에서도 동일한 결과를 확인할 수 있었습니다.
 
