@@ -34,7 +34,7 @@
 
 | Youtube | Vimeo | Twitter |
 |---------|---------|-------|
-| ![image](https://user-images.githubusercontent.com/82663161/216811440-f9730436-e546-4483-afcb-7656d1bbc3f3.png) | ![image](https://user-images.githubusercontent.com/82663161/216819798-2bdd205e-fbeb-4850-b68b-afbebdd7e26c.png) | ![image](https://user-images.githubusercontent.com/82663161/216811591-7b9636ed-f60f-43f3-819c-928a76e191ec.png) |
+| ![image](https://user-images.githubusercontent.com/82663161/216811440-f9730436-e546-4483-afcb-7656d1bbc3f3.png) | ![image](https://user-images.githubusercontent.com/82663161/216819798-2bdd205e-fbeb-4850-b68b-afbebdd7e26c.png) | ![image](https://user-images.githubusercontent.com/82663161/216821082-c875ae40-ffe7-4789-8d87-fe7bd7ab8b86.png) |
 
 ## 미구현 사항
 
